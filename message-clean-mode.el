@@ -53,16 +53,24 @@
 
 (defcustom message-clean-mode-extra-handlers
   '(user-error)
-  "List of function symbols to mute."
+  "List of function to mute."
   :type 'list
   :group 'message-clean)
+
+(defmacro message-clean-mode--noflet (&rest body)
+  "Defined local functions with `noflet'."
+  (declare (indent 0) (debug t))
+  (dolist (fnc message-clean-mode-extra-handlers)
+    (eval `(noflet ((,fnc (format &rest args)
+                          (message "%s: %s"(format "%s" ',fnc)
+                                   (format-message format args))))
+             ,@body))))
 
 (defun message-clean-mode--mute (fnc &rest args)
   "Mute any commands (FNC, ARGS."
   (let ((inhibit-message message-clean-mode-inhibit-echo)
         message-log-max)
-    (noflet ((user-error (format &rest args)))
-      (apply fnc args))))
+    (message-clean-mode--noflet (apply fnc args))))
 
 (defun message-clean-mode--enable ()
   "Enable `message-clean-mode'."
