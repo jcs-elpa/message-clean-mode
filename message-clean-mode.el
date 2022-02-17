@@ -51,11 +51,18 @@
   :type 'boolean
   :group 'message-clean)
 
+(defcustom message-clean-mode-extra-handlers
+  '(user-error)
+  "List of function symbols to mute."
+  :type 'list
+  :group 'message-clean)
+
 (defun message-clean-mode--mute (fnc &rest args)
   "Mute any commands (FNC, ARGS."
   (let ((inhibit-message message-clean-mode-inhibit-echo)
         message-log-max)
-    (apply fnc args)))
+    (noflet ((user-error (format &rest args)))
+      (apply fnc args))))
 
 (defun message-clean-mode--enable ()
   "Enable `message-clean-mode'."
