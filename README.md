@@ -6,6 +6,9 @@
 
 [![CI](https://github.com/jcs-elpa/message-clean-mode/actions/workflows/test.yml/badge.svg)](https://github.com/jcs-elpa/message-clean-mode/actions/workflows/test.yml)
 
+Simple minor-mode to keep your `*Messages*` buffer clean, without Emacs spamming
+a bunch of command messages.
+
 ## 🔨 Usage
 
 First assign commands you want to keep the `*Messages*` buffer clean.
