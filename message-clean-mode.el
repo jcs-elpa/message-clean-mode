@@ -55,8 +55,7 @@
   "Mute any commands (FNC, ARGS."
   (let ((inhibit-message message-clean-mode-inhibit-echo)
         message-log-max)
-    (noflet ((user-error (format &rest args)))
-      (apply fnc args))))
+    (apply fnc args)))
 
 (defun message-clean-mode--enable ()
   "Enable `message-clean-mode'."
