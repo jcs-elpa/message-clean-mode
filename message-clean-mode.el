@@ -60,12 +60,11 @@
 (defmacro message-clean-mode--noflet (&rest body)
   "Defined local functions with `noflet'."
   (declare (indent 0) (debug t))
-  `(dolist (fnc message-clean-mode-extra-handlers)
-     (eval
-      `(noflet ((,fnc (fmt &rest args)
-                      (message "%s: %s" (format "%s" ',fnc)
-                               (format-message fmt args))))
-         ,@body))))
+  (let (bindings)
+    (dolist (fnc message-clean-mode-extra-handlers)
+      (push `(,fnc (fmt &rest args) (message fmt args))  ; replace with `message'
+            bindings))
+    (apply 'noflet|expand bindings body)))
 
 (defun message-clean-mode--mute (fnc &rest args)
   "Mute any commands (FNC, ARGS)."
