@@ -7,18 +7,18 @@ PKG-FILES := message-clean-mode.el
 
 TEST-FILES := $(shell ls test/message-clean-mode-*.el)
 
-.PHONY: clean checkdoc lint unix-build unix-compile	unix-test
+.PHONY: clean checkdoc lint build compile unix-test
 
-unix-ci: clean unix-build unix-compile
+ci: clean build compile
 
-unix-build:
+build:
 	$(CASK) install
 
-unix-compile:
+compile:
 	@echo "Compiling..."
 	@$(CASK) $(EMACS) -Q --batch \
 		-L . \
-		--eval '(setq byte-compile-error-on-warn nil)' \
+		--eval '(setq byte-compile-error-on-warn t)' \
 		-f batch-byte-compile $(PKG-FILES)
 
 unix-test:
