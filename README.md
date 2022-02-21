@@ -11,10 +11,11 @@ a bunch of command messages.
 
 ## 🔨 Usage
 
-First assign commands you want to keep the `*Messages*` buffer clean.
+First, assign commands you want to keep the `*Messages*` buffer clean.
 
 ```el
-(setq message-clean-mode-commands '(push-mark set-mark-command ...))
+(setq message-clean-mode-mute-commands '(push-mark ...))
+(setq message-clean-mode-echo-commands '(set-mark-command ...))
 ```
 
 Then call `M-x message-clean-mode`!
