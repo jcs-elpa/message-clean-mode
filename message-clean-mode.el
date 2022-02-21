@@ -38,32 +38,41 @@
   :group 'convenience
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/message-clean-mode"))
 
-(defcustom message-clean-mode-commands
+(defcustom message-clean-mode-mute-commands
+  '()
+  "List of commands to mute completely."
+  :type 'list
+  :group 'message-clean)
+
+(defcustom message-clean-mode-echo-commands
   '()
   "List of commands to inhibit log to *Messages* buffer."
   :type 'list
   :group 'message-clean)
 
-(defcustom message-clean-mode-inhibit-echo nil
-  "Non-nil to hide message from echo area."
-  :type 'boolean
-  :group 'message-clean)
-
 (defun message-clean-mode--mute (fnc &rest args)
   "Mute any commands (FNC, ARGS)."
-  (let ((inhibit-message message-clean-mode-inhibit-echo)
-        message-log-max)
+  (let ((inhibit-message t) message-log-max)
+    (apply fnc args)))
+
+(defun message-clean-mode--echo (fnc &rest args)
+  "Mute any commands (FNC, ARGS)."
+  (let (inhibit-message message-log-max)
     (apply fnc args)))
 
 (defun message-clean-mode--enable ()
   "Enable function `message-clean-mode'."
-  (dolist (cmd message-clean-mode-commands)
-    (advice-add cmd :around #'message-clean-mode--mute)))
+  (dolist (cmd message-clean-mode-mute-commands)
+    (advice-add cmd :around #'message-clean-mode--mute))
+  (dolist (cmd message-clean-mode-echo-commands)
+    (advice-add cmd :around #'message-clean-mode--echo)))
 
 (defun message-clean-mode--disable ()
   "Disable function `message-clean-mode'."
-  (dolist (cmd message-clean-mode-commands)
-    (advice-remove cmd #'message-clean-mode--mute)))
+  (dolist (cmd message-clean-mode-mute-commands)
+    (advice-remove cmd #'message-clean-mode--mute))
+  (dolist (cmd message-clean-mode-echo-commands)
+    (advice-remove cmd #'message-clean-mode--echo)))
 
 ;;;###autoload
 (define-minor-mode message-clean-mode
