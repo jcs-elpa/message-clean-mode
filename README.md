@@ -9,6 +9,8 @@
 Simple minor-mode to keep your `*Messages*` buffer clean, without Emacs spamming
 a bunch of command messages.
 
+This is only useful for people who constantly check `*Messages*` buffer for debug log.
+
 ## 🔨 Usage
 
 First, assign commands you want to keep the `*Messages*` buffer clean.
@@ -19,6 +21,12 @@ First, assign commands you want to keep the `*Messages*` buffer clean.
 ```
 
 Then call `M-x message-clean-mode`!
+
+```el
+(setq message-clean-mode-minor-mode 'echo)  ; or `nil' or `mute'
+```
+
+This will allow you to mute message like `xxx-minor-mode is enabled/disabled`!
 
 ## Contribute
 
