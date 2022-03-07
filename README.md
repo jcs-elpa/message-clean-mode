@@ -9,8 +9,8 @@
 Simple minor-mode to keep your `*Messages*` buffer clean, without Emacs spamming
 a bunch of command messages.
 
-**P.S. This is only useful for people who constantly check `*Messages*` buffer
-for debug log.**
+*P.S. This is only useful for people who constantly check `*Messages*` buffer
+for debug log.*
 
 ## 💾 Quickstart
 
