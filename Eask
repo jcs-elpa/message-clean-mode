@@ -1,8 +1,13 @@
-(source "melpa")
+(package "message-clean-mode"
+         "0.1.0"
+		 "Keep messages buffer clean")
 
-(package "message-clean-mode" "0.1.0" "Keep messages buffer clean")
+(website-url "https://github.com/jcs-elpa/message-clean-mode")
+(keywords "messages" "clean")
 
 (package-file "message-clean-mode.el")
+
+(source "melpa")
 
 (depends-on "emacs" "25.1")
 

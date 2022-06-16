@@ -4,11 +4,10 @@
 ;; Created date 2022-02-17 16:16:50
 
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
-;; Description: Keep messages buffer clean
-;; Keyword: messages clean
+;; URL: https://github.com/jcs-elpa/message-clean-mode
 ;; Version: 0.1.0
 ;; Package-Requires: ((emacs "25.1"))
-;; URL: https://github.com/jcs-elpa/message-clean-mode
+;; Keywords: messages clean
 
 ;; This file is NOT part of GNU Emacs.
 
