@@ -3,7 +3,7 @@
 		 "Keep messages buffer clean")
 
 (website-url "https://github.com/jcs-elpa/message-clean-mode")
-(keywords "messages" "clean")
+(keywords "convenience" "messages" "clean")
 
 (package-file "message-clean-mode.el")
 
