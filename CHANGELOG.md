@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.1.1 (Unreleased)
 > Released N/A
 
-* N/A
+* Add `msgu` as dependency (427e8d261f4ce970dfcd1ba625761d0b80c345c9)
 
 ## 0.1.0
 > Released Mar 01, 2022
