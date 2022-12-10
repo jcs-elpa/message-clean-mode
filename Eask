@@ -7,6 +7,8 @@
 
 (package-file "message-clean-mode.el")
 
+(script "test" "echo \"Error: no test specified\" && exit 1")
+
 (source "jcs-elpa")
 
 (depends-on "emacs" "25.1")
