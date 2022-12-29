@@ -83,23 +83,9 @@
 ;; (@* "Core" )
 ;;
 
-(defun message-clean-mode--funcall (fnc args)
-  "Funcall (FNC . ARGS)."
-  (cl-case (length args)  ; XXX Make this better...
-    (0 (funcall-interactively fnc))
-    (1 (funcall-interactively fnc (nth 0 args)))
-    (2 (funcall-interactively fnc (nth 0 args) (nth 1 args)))
-    (3 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args)))
-    (4 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args)))
-    (5 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args) (nth 4 args)))
-    (6 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args) (nth 4 args) (nth 5 args)))
-    (7 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args) (nth 4 args) (nth 5 args) (nth 6 args)))
-    (8 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args) (nth 4 args) (nth 5 args) (nth 6 args) (nth 7 args)))
-    (9 (funcall-interactively fnc (nth 0 args) (nth 1 args) (nth 2 args) (nth 3 args) (nth 4 args) (nth 5 args) (nth 6 args) (nth 7 args) (nth 8 args)))))
-
 (defun message-clean-mode--apply (inter fnc &rest args)
   "Apply (FNC, ARGS); INTER non-nil call it interactively."
-  (if inter (message-clean-mode--funcall fnc args)
+  (if inter (apply #'funcall-interactively (append (list fnc) args))
     (apply fnc args)))
 
 (defun message-clean-mode--mute (fnc &rest args)
@@ -109,7 +95,7 @@
 
 (defun message-clean-mode--echo (fnc &rest args)
   "Mute any commands (FNC, ARGS)."
-  (let (message-log-max)
+  (msgu-inhibit-log
     (apply #'message-clean-mode--apply (called-interactively-p 'interactive) fnc args)))
 
 (defun message-clean-mode--minor-mode-ad-add (&rest _)
@@ -138,7 +124,7 @@
 
 ;;;###autoload
 (define-minor-mode message-clean-mode
-  "Minor mode 'message-clean-mode'."
+  "Minor mode `message-clean-mode'."
   :global t
   :require 'message-clean-mode
   :group 'message-clean
