@@ -1,6 +1,6 @@
 (package "message-clean-mode"
-		 "0.1.0"
-		 "Keep messages buffer clean")
+	     "0.1.0"
+	     "Keep messages buffer clean")
 
 (website-url "https://github.com/jcs-elpa/message-clean-mode")
 (keywords "convenience" "messages" "clean")
