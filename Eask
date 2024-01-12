@@ -1,5 +1,5 @@
 (package "message-clean-mode"
-         "0.1.0"
+		 "0.1.0"
 		 "Keep messages buffer clean")
 
 (website-url "https://github.com/jcs-elpa/message-clean-mode")
@@ -9,10 +9,11 @@
 
 (script "test" "echo \"Error: no test specified\" && exit 1")
 
-(source "jcs-elpa")
+(source 'gnu)
+(source 'jcs-elpa)
 
 (depends-on "emacs" "25.1")
 (depends-on "msgu")
 
 (setq network-security-level 'low      ; see https://github.com/jcs090218/setup-emacs-windows/issues/156#issuecomment-932956432
-      byte-compile-error-on-warn nil)
+	  byte-compile-error-on-warn nil)

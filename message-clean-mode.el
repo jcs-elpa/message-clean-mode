@@ -80,6 +80,25 @@
     (`echo #'message-clean-mode--echo)))
 
 ;;
+;; (@* "Util" )
+;;
+
+(defun message-clean-mode--re-enable-mode (modename)
+  "Re-enable the MODENAME."
+  (msgu-silent
+    (funcall-interactively modename -1) (funcall-interactively modename 1)))
+
+(defun message-clean-mode--re-enable-mode-if-was-enabled (modename)
+  "Re-enable the MODENAME if was enabled."
+  (when (boundp modename)
+    (when (symbol-value modename) (message-clean-mode--re-enable-mode modename))
+    (symbol-value modename)))
+
+(defun message-clean-mode--listify (obj)
+  "Turn OBJ to list."
+  (if (listp obj) obj (list obj)))
+
+;;
 ;; (@* "Core" )
 ;;
 
@@ -129,6 +148,26 @@
   :require 'message-clean-mode
   :group 'message-clean
   (if message-clean-mode (message-clean-mode--enable) (message-clean-mode--disable)))
+
+;;
+;; (@* "Users" )
+;;
+
+(defun message-clean-mode--add-commands (command lst)
+  "Add COMMAND to LST."
+  (let ((commands (message-clean-mode--listify command)))
+    (nconc lst commands)
+    (message-clean-mode--re-enable-mode-if-was-enabled #'message-clean-mode)))
+
+;;;###autoload
+(defun message-clean-mode-add-echo-commands (command)
+  "Add COMMAND to echo list."
+  (message-clean-mode--add-commands command message-clean-mode-echo-commands))
+
+;;;###autoload
+(defun message-clean-mode-add-mute-commands (command)
+  "Add COMMAND to mute list."
+  (message-clean-mode--add-commands command message-clean-mode-mute-commands))
 
 (provide 'message-clean-mode)
 ;;; message-clean-mode.el ends here
