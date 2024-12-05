@@ -43,15 +43,15 @@
   :link '(url-link :tag "Repository" "https://github.com/jcs-elpa/message-clean-mode"))
 
 (defcustom message-clean-mode-mute-commands
-  '()
+  nil
   "List of commands to mute completely."
-  :type 'list
+  :type '(list symbol)
   :group 'message-clean)
 
 (defcustom message-clean-mode-echo-commands
-  '()
+  nil
   "List of commands to inhibit log to *Messages* buffer."
-  :type 'list
+  :type '(list symbol)
   :group 'message-clean)
 
 (defcustom message-clean-mode-minor-mode nil
@@ -119,12 +119,12 @@
 
 (defun message-clean-mode--minor-mode-ad-add (&rest _)
   "Apply `advice-add' mute/echo to all minor-mode."
-  (when-let ((func (message-clean-mode--function-symbol message-clean-mode-minor-mode)))
+  (when-let* ((func (message-clean-mode--function-symbol message-clean-mode-minor-mode)))
     (message-clean-mode--ad-add minor-mode-list func)))
 
 (defun message-clean-mode--minor-mode-ad-remove (&rest _)
   "Apply `advice-remove' mute/echo to all minor-mode."
-  (when-let ((func (message-clean-mode--function-symbol message-clean-mode-minor-mode)))
+  (when-let* ((func (message-clean-mode--function-symbol message-clean-mode-minor-mode)))
     (message-clean-mode--ad-remove minor-mode-list func)))
 
 (defun message-clean-mode--enable ()
