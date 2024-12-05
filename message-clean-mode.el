@@ -31,10 +31,10 @@
 
 ;;; Code:
 
-(require 'cl-lib)
-(require 'subr-x)
-
-(require 'msgu)
+(eval-when-compile
+  (require 'msgu)
+  (require 'cl-lib)
+  (require 'subr-x))
 
 (defgroup message-clean nil
   "Keep messages buffer clean."
