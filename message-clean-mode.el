@@ -6,7 +6,7 @@
 ;; Author: Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/jcs-elpa/message-clean-mode
 ;; Version: 0.1.0
-;; Package-Requires: ((emacs "25.1") (msgu "0.1.0"))
+;; Package-Requires: ((emacs "26.1") (msgu "0.1.0"))
 ;; Keywords: convenience messages clean
 
 ;; This file is NOT part of GNU Emacs.
