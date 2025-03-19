@@ -173,4 +173,8 @@
   (message-clean-mode--add-commands command message-clean-mode-mute-commands))
 
 (provide 'message-clean-mode)
+;; Local Variables:
+;; coding: utf-8
+;; no-byte-compile: t
+;; End:
 ;;; message-clean-mode.el ends here
