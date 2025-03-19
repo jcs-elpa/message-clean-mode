@@ -104,18 +104,21 @@
 
 (defun message-clean-mode--apply (inter fnc &rest args)
   "Apply (FNC, ARGS); INTER non-nil call it interactively."
-  (if inter (apply #'funcall-interactively (append (list fnc) args))
+  (if inter
+      (apply #'funcall-interactively (append (list fnc) args))
     (apply fnc args)))
 
 (defun message-clean-mode--mute (fnc &rest args)
   "Mute any commands (FNC, ARGS)."
   (msgu-silent
-    (apply #'message-clean-mode--apply (called-interactively-p 'interactive) fnc args)))
+    (let ((inter (called-interactively-p 'interactive)))
+      (apply #'message-clean-mode--apply inter fnc args))))
 
 (defun message-clean-mode--echo (fnc &rest args)
   "Mute any commands (FNC, ARGS)."
   (msgu-inhibit-log
-    (apply #'message-clean-mode--apply (called-interactively-p 'interactive) fnc args)))
+    (let ((inter (called-interactively-p 'interactive)))
+      (apply #'message-clean-mode--apply inter fnc args))))
 
 (defun message-clean-mode--minor-mode-ad-add (&rest _)
   "Apply `advice-add' mute/echo to all minor-mode."
