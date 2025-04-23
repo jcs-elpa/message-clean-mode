@@ -1,3 +1,5 @@
+;; -*- mode: eask; lexical-binding: t -*-
+
 (package "message-clean-mode"
 		 "0.1.0"
 		 "Keep messages buffer clean")
